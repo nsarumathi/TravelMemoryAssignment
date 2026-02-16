@@ -1,4 +1,5 @@
 **#Travel Memory Application Deployment on AWS**
+
 The Travel Memory Application is a full-stack web application built using the MERN Stack:   
 
        > MongoDB – Database       
@@ -14,13 +15,34 @@ This project demonstrates deployment of the application on Amazon EC2, implement
   
 **Repository Used:** 🔗 https://github.com/UnpredictablePrashant/TravelMemory
 
-Setup:
---------
+HIGH LEVEL FLOW:
+-----------------
+User
+   ↓
+Cloudflare (DNS + SSL)
+   ↓
+Frontend Application Load Balancer (ALB-FE)
+   ↓
+Frontend Auto Scaling Group (ASG-FE)
+   ↓
+Frontend EC2 Instances (Nginx + React Build)
+   ↓ (API Calls via Backend ALB DNS)
+Backend Application Load Balancer (ALB-BE)
+   ↓
+Backend Auto Scaling Group (ASG-BE)
+   ↓
+Backend EC2 Instances (Nginx + Node.js + PM2)
+   ↓
+MongoDB Atlas
+
+
+DEPLOYMENT SETUP:
+------------------
 1.AWS EC2 Setup for Frontend & Backend
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       a.Launch 2 instances as (travel-memory-be & travel-memory-fe))
           Launch instance using Amazon Linux 2023 ,t2.micro instance with Security Group:Allow SSH (22),Allow HTTP (80),Allow your backend port (3000)
-          <img width="1918" height="457" alt="EC1 EC2" src="https://github.com/user-attachments/assets/7481e81a-fce8-476a-bd2f-1a85c48cd196" />
+<img width="1918" height="457" alt="EC1 EC2" src="https://github.com/user-attachments/assets/7481e81a-fce8-476a-bd2f-1a85c48cd196" />
 
       b.BackendServer Configuration (travel-memory-be)
           Install Packages (Git,Nginx,-Node.js)
@@ -30,14 +52,14 @@ Setup:
               curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
               sudo yum install nodejs -y
               node -v
-				<img width="1918" height="842" alt="EC1_BE1" src="https://github.com/user-attachments/assets/f3c98326-e05e-47c9-8e9a-ce72056e47c6" />
-				<img width="1917" height="832" alt="EC1_BE2" src="https://github.com/user-attachments/assets/2b0317cb-ffb4-424a-a7a1-acd75e70b241" />
+<img width="1918" height="842" alt="EC1_BE1" src="https://github.com/user-attachments/assets/f3c98326-e05e-47c9-8e9a-ce72056e47c6" />
+<img width="1917" height="832" alt="EC1_BE2" src="https://github.com/user-attachments/assets/2b0317cb-ffb4-424a-a7a1-acd75e70b241" />
 
           Clone Repository
               git clone https://github.com/UnpredictablePrashant/TravelMemory.git
               cd TravelMemory/backend
               npm install
-				<img width="1918" height="812" alt="EC1_BE3" src="https://github.com/user-attachments/assets/2a457c02-2742-491c-ae23-123788a21c9f" />
+<img width="1918" height="812" alt="EC1_BE3" src="https://github.com/user-attachments/assets/2a457c02-2742-491c-ae23-123788a21c9f" />
 
 
           Edit .env file with MongoDB Atlas connection string & Port
@@ -48,16 +70,16 @@ Setup:
               npm install -g pm2
               pm2 start index.js
               pm2 save
-				<img width="1918" height="711" alt="EC1_BE6" src="https://github.com/user-attachments/assets/1200ad18-a3cb-41aa-9d0e-6d8c529b8089" />
+<img width="1918" height="711" alt="EC1_BE6" src="https://github.com/user-attachments/assets/1200ad18-a3cb-41aa-9d0e-6d8c529b8089" />
 
               now test with http://<BackendEC2-Public-IP>:3000
-              <img width="1397" height="240" alt="EC1_BE7" src="https://github.com/user-attachments/assets/4d42a281-2705-48af-a195-f9f5901ed52a" />
+<img width="1397" height="240" alt="EC1_BE7" src="https://github.com/user-attachments/assets/4d42a281-2705-48af-a195-f9f5901ed52a" />
 
             
       b.NGINX Reverse Proxy Setup(Backend)
           Edit configuration
              sudo nano /etc/nginx/nginx.conf
-             <img width="403" height="300" alt="image" src="https://github.com/user-attachments/assets/72d6b83d-6e66-41a0-865c-000c1010ac95" />
+<img width="403" height="300" alt="image" src="https://github.com/user-attachments/assets/72d6b83d-6e66-41a0-865c-000c1010ac95" />
 
           Restart nginx ,now accessible by http://<BackendEC2-Public-IP>
              sudo systemctl restart nginx
