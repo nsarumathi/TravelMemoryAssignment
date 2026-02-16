@@ -17,24 +17,7 @@ This project demonstrates deployment of the application on Amazon EC2, implement
 
 HIGH LEVEL FLOW:
 -----------------
-User
-   ↓
-Cloudflare (DNS + SSL)
-   ↓
-Frontend Application Load Balancer (ALB-FE)
-   ↓
-Frontend Auto Scaling Group (ASG-FE)
-   ↓
-Frontend EC2 Instances (Nginx + React Build)
-   ↓ (API Calls via Backend ALB DNS)
-Backend Application Load Balancer (ALB-BE)
-   ↓
-Backend Auto Scaling Group (ASG-BE)
-   ↓
-Backend EC2 Instances (Nginx + Node.js + PM2)
-   ↓
-MongoDB Atlas
-
+<img width="447" height="390" alt="image" src="https://github.com/user-attachments/assets/70e25c9a-7259-4fdb-abac-c383d36b5a83" />
 
 DEPLOYMENT SETUP:
 ------------------
@@ -42,7 +25,8 @@ DEPLOYMENT SETUP:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       a.Launch 2 instances as (travel-memory-be & travel-memory-fe))
           Launch instance using Amazon Linux 2023 ,t2.micro instance with Security Group:Allow SSH (22),Allow HTTP (80),Allow your backend port (3000)
-![EC2 Setup](Images\EC1&EC2.png)
+<img width="1918" height="457" alt="EC1 EC2" src="https://github.com/user-attachments/assets/68c09ac1-e0a5-4c69-88d3-dc3bb973fbf5" />
+
 
       b.BackendServer Configuration (travel-memory-be)
           Install Packages (Git,Nginx,-Node.js)
@@ -52,8 +36,8 @@ DEPLOYMENT SETUP:
               curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
               sudo yum install nodejs -y
               node -v
-<img width="1918" height="842" alt="EC1_BE1" src="https://github.com/user-attachments/assets/f3c98326-e05e-47c9-8e9a-ce72056e47c6" />
-<img width="1917" height="832" alt="EC1_BE2" src="https://github.com/user-attachments/assets/2b0317cb-ffb4-424a-a7a1-acd75e70b241" />
+![EC2 Setup](Images\EC1_BE1.png)
+![EC2 Setup](Images\EC1_BE2.png)
 
           Clone Repository
               git clone https://github.com/UnpredictablePrashant/TravelMemory.git
