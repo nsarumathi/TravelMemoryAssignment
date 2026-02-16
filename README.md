@@ -19,6 +19,14 @@ HIGH LEVEL FLOW:
 -----------------
 <img width="447" height="390" alt="image" src="https://github.com/user-attachments/assets/70e25c9a-7259-4fdb-abac-c383d36b5a83" />
 
+Architecture Diagram:
+----------------------
+<img width="1280" height="1203" alt="image" src="https://github.com/user-attachments/assets/0f4e898f-ce54-4e2d-8607-e2381d0e1393" />
+
+ASG Configuration Setup:
+--------------------------
+<img width="611" height="385" alt="image" src="https://github.com/user-attachments/assets/42adc99a-a4f6-4743-b7c7-c84dad08333f" />
+
 DEPLOYMENT SETUP:
 ------------------
 1.AWS EC2 Setup for Frontend & Backend
