@@ -42,7 +42,7 @@ DEPLOYMENT SETUP:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       a.Launch 2 instances as (travel-memory-be & travel-memory-fe))
           Launch instance using Amazon Linux 2023 ,t2.micro instance with Security Group:Allow SSH (22),Allow HTTP (80),Allow your backend port (3000)
-<img width="1918" height="457" alt="EC1 EC2" src="https://github.com/user-attachments/assets/7481e81a-fce8-476a-bd2f-1a85c48cd196" />
+![EC2 Setup](Images\EC1&EC2.png)
 
       b.BackendServer Configuration (travel-memory-be)
           Install Packages (Git,Nginx,-Node.js)
